@@ -506,6 +506,25 @@ The final analysis will use actual project data to produce measurable results. N
 
 
 
+## KPI Dictionary
+| KPI                           | Definition                                                                 |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| **Total Customers**           | Distinct customers within the analysis scope                               |
+| **Active Customers**          | Customers with ≥1 qualifying transaction in the previous 90 days           |
+| **Customer Activity Rate**    | Active customers ÷ total customers × 100                                   |
+| **Total Accounts**            | Distinct accounts within the analysis scope                                |
+| **Active Accounts**           | Accounts meeting the defined active-status criteria                        |
+| **Total Transaction Volume**  | Number of qualifying transactions                                          |
+| **Total Transaction Value**   | Sum of qualifying transaction amounts                                      |
+| **Average Transaction Value** | Total transaction value ÷ qualifying transaction count                     |
+| **Total Deposit Balance**     | Sum of qualifying customer account balances                                |
+| **Total Loan Portfolio**      | Sum of outstanding balances for loans in scope                             |
+| **Loan Default Rate**         | Defaulted loans ÷ total loans × 100                                        |
+| **Loan Delinquency Rate**     | Delinquent loans ÷ total loans × 100                                       |
+| **Active Cards**              | Cards meeting the defined active-status criteria                           |
+| **Total Card Spending**       | Sum of qualifying card transaction amounts                                 |
+| **Customer Value Score**      | Composite measure of customer financial value and engagement               |
+| **Branch Performance**        | Composite assessment of branch-level financial and operational performance |
 
 
 
