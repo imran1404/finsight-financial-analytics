@@ -31,7 +31,25 @@ The bank needs to understand card adoption, usage, spending behavior, and custom
 The bank needs to compare branches based on customer activity, transaction performance, account balances, and loan activity.
 
 
+## 4. Analytical Domains
 
+### 4.1 Customer Analytics
+Analyze customer profiles, activity levels, financial behavior, product relationships, segmentation, and customer value.
+
+### 4.2 Account Analytics
+Analyze account types, account status, balances, account activity, and balance distribution.
+
+### 4.3 Transaction Analytics
+Analyze transaction volume, transaction value, transaction types, time-based trends, customer transaction behavior, and potential anomalies.
+
+### 4.4 Card Analytics
+Analyze card adoption, card status, spending activity, transaction frequency, utilization, and customer card behavior.
+
+### 4.5 Loan Analytics
+Analyze loan products, loan amounts, outstanding balances, repayment behavior, delinquency, defaults, and loan risk patterns.
+
+### 4.6 Branch Analytics
+Analyze branch-level customer activity, account balances, transaction performance, loan portfolios, and overall branch performance.
 
 
 
