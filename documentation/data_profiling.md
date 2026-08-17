@@ -192,3 +192,160 @@ The `created_at` field can support:
 Next profiling target:
 
 **accounts**
+
+
+
+## 3. Accounts Table Profiling
+
+### 3.1 Table Overview
+
+The `accounts` table contains banking account information linked to customers.
+
+| Attribute | Result |
+|---|---:|
+| Table | `accounts` |
+| Rows | 75,000 |
+| Columns | 5 |
+| Identifier | `account_id` |
+
+Columns:
+
+- `account_id`
+- `customer_id`
+- `account_type`
+- `balance_usd`
+- `open_date`
+
+---
+
+### 3.2 Row Count and Uniqueness
+
+The `accounts` table contains **75,000 records**.
+
+`account_id` was checked for uniqueness:
+
+| Check | Result |
+|---|---:|
+| Total rows | 75,000 |
+| Unique `account_id` | 75,000 |
+| Duplicate `account_id` | 0 |
+
+This confirms that each account has a unique identifier.
+
+---
+
+### 3.3 NULL Analysis
+
+NULL values were checked across key account fields.
+
+| Column | NULL Records |
+|---|---:|
+| `account_id` | 0 |
+| `customer_id` | 0 |
+| `account_type` | 0 |
+| `balance_usd` | 0 |
+| `open_date` | 0 |
+
+No missing values were identified in the profiled account fields.
+
+---
+
+### 3.4 Customer Relationship Integrity
+
+The `customer_id` field was checked for both NULL values and unmatched customer records.
+
+| Check | Result |
+|---|---:|
+| Accounts with NULL `customer_id` | 0 |
+| Orphan accounts | 0 |
+
+Every account is associated with a valid customer record in the `customers` table.
+
+---
+
+### 3.5 Account Type Distribution
+
+Account types were grouped to understand the distribution of banking products.
+
+| Account Type | Account Count |
+|---|---:|
+| Savings | 25,102 |
+| Checking | 25,080 |
+| Business | 24,818 |
+
+The three account types are relatively evenly distributed, with approximately 25,000 accounts in each category.
+
+---
+
+### 3.6 Balance Analysis
+
+Balance statistics were analyzed by account type.
+
+| Account Type | Account Count | Average Balance | Minimum Balance | Maximum Balance |
+|---|---:|---:|---:|---:|
+| Checking | 25,080 | $100,097.20 | $13.67 | $199,999.79 |
+| Savings | 25,102 | $99,963.17 | $22.89 | $199,991.35 |
+| Business | 24,818 | $99,702.86 | $22.19 | $199,998.45 |
+
+Checking accounts have the highest average balance at approximately **$100,097**, while Business accounts have the lowest average balance at approximately **$99,703**.
+
+---
+
+### 3.7 Balance Distribution
+
+Account balances were segmented into ranges to understand the distribution beyond the average.
+
+| Balance Range | Account Count |
+|---|---:|
+| 1M+ | 37,454 |
+| 50K - 1M | 18,774 |
+| 10K - 50K | 15,019 |
+| Below 10K | 3,753 |
+
+The majority of accounts fall into the **1M+** category based on the dataset's balance values.
+
+---
+
+### 3.8 Negative Balance Check
+
+Accounts with negative balances were checked.
+
+| Check | Result |
+|---|---:|
+| Accounts with negative balance | 0 |
+
+No negative account balances were identified.
+
+---
+
+### 3.9 Account Opening Date Analysis
+
+Account opening dates were analyzed by account type.
+
+| Account Type | First Account | Latest Account | Account Count |
+|---|---|---|---:|
+| Checking | 2019-01-01 | 2025-12-31 | 25,080 |
+| Business | 2019-01-01 | 2025-12-31 | 24,818 |
+| Savings | 2019-01-01 | 2025-12-31 | 25,102 |
+
+All three account types span the same overall period from **2019 to 2025**.
+
+---
+
+### 3.10 Accounts Data Quality Summary
+
+The profiling indicates that the `accounts` table is structurally clean and suitable for downstream analysis.
+
+**Key findings:**
+
+- 75,000 account records are available.
+- `account_id` is unique across all records.
+- No NULL values were identified in the key account fields.
+- All accounts have a valid `customer_id`.
+- No orphan accounts were identified.
+- Three account types are present: Checking, Savings, and Business.
+- No negative balances were identified.
+- Account opening dates are available for all records.
+- Account records span from 2019 through 2025.
+
+The `accounts` table is therefore suitable for further SQL analysis and integration with other banking tables.
