@@ -534,6 +534,74 @@ Loans Table: COMPLETED
 
 
 
+## 3.13 Merchants Data Profiling
+
+The `merchants` table was profiled to assess record completeness, identifier uniqueness, duplicate values, and geographic coverage.
+
+### 3.13.1 Record and Identifier Analysis
+
+The `merchant_id` field was checked for missing values and uniqueness.
+
+| Check | Result |
+|---|---:|
+| Total Merchant Records | 5,000 |
+| Non-NULL `merchant_id` | 5,000 |
+| NULL `merchant_id` | 0 |
+| Unique `merchant_id` | 5,000 |
+
+All 5,000 merchant records contain a non-NULL and unique `merchant_id`.
+
+### 3.13.2 Merchant Name Analysis
+
+The `merchant_name` field was checked for missing, blank, and repeated values.
+
+| Check | Result |
+|---|---:|
+| Total Merchant Records | 5,000 |
+| Non-NULL `merchant_name` | 5,000 |
+| NULL `merchant_name` | 0 |
+| Blank `merchant_name` | 0 |
+| Unique Merchant Names | 4,592 |
+| Repeated Merchant Names | 261 |
+
+There are 4,592 unique merchant names across 5,000 records.
+
+Repeated merchant names were investigated further to determine whether they represented duplicate merchant records.
+
+The `merchant_name` and `city` combination was checked for duplicate records.
+
+| Check | Result |
+|---|---:|
+| Duplicate `merchant_name + city` combinations | 0 |
+
+No duplicate records were identified based on the combination of `merchant_name` and `city`.
+
+Therefore, repeated merchant names were not treated as data-quality errors.
+
+### 3.13.3 City Analysis
+
+The `city` field was checked for missing, blank, and unique values.
+
+| Check | Result |
+|---|---:|
+| Total Merchant Records | 5,000 |
+| Non-NULL `city` | 5,000 |
+| NULL `city` | 0 |
+| Blank `city` | 0 |
+| Unique Cities | 4,317 |
+
+All merchant records contain a non-NULL and non-blank city value.
+
+### 3.13.4 Merchants Data Quality Summary
+
+The `merchants` table contains 5,000 records with complete and unique merchant identifiers.
+
+No NULL or blank values were identified in the `merchant_id`, `merchant_name`, or `city` fields.
+
+Although 261 merchant names appear more than once, further validation confirmed that no duplicate `merchant_name + city` combinations exist. These repeated names were therefore considered legitimate repeated merchant names rather than duplicate records.
+
+Overall, the `merchants` table passed the basic data-quality checks and requires no immediate cleaning.
+
 
 
 
