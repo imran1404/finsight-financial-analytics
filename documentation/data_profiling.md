@@ -723,7 +723,87 @@ Transactions Table: COMPLETED
 
 
 
+---
 
+## 3.15 Branches Table Profiling
+
+### 3.15.1 Row Count and Branch ID Integrity
+
+The `branches` table contains **500 records**.
+
+| Metric | Result |
+|---|---:|
+| Total rows | 500 |
+| Non-NULL `branch_id` | 500 |
+| NULL `branch_id` | 0 |
+| Unique `branch_id` | 500 |
+
+The `branch_id` field is fully populated and unique across all branch records, indicating strong identifier integrity.
+
+---
+
+### 3.15.2 Branch Name Completeness and Uniqueness
+
+The `branch_name` field contains no NULL or blank values.
+
+| Metric | Result |
+|---|---:|
+| Total rows | 500 |
+| Non-NULL `branch_name` | 500 |
+| NULL `branch_name` | 0 |
+| Blank `branch_name` | 0 |
+
+Duplicate analysis identified **8 branch names appearing more than once**. These represent multiple branch records sharing the same branch name and should not automatically be treated as data errors because each record has a unique `branch_id`.
+
+---
+
+### 3.15.3 Manager Name Completeness
+
+The `manager_name` field is fully populated.
+
+| Metric | Result |
+|---|---:|
+| Total rows | 500 |
+| Non-NULL `manager_name` | 500 |
+| NULL `manager_name` | 0 |
+| Blank `manager_name` | 0 |
+
+One manager, **Daniel Brown**, is associated with two branch records. This may represent a legitimate management assignment and does not constitute an identifier integrity issue.
+
+---
+
+### 3.15.4 Geographic Data Completeness
+
+The `city` and `country` fields contain no populated values.
+
+| Field | Total Rows | Non-NULL | NULL | Blank |
+|---|---:|---:|---:|---:|
+| `city` | 500 | 0 | 500 | 0 |
+| `country` | 500 | 0 | 500 | 0 |
+
+This represents a significant data completeness limitation. Geographic analysis at the city or country level cannot be reliably performed using the current `branches` table.
+
+These missing values should be documented as a source-data limitation rather than manually populated without a verified source.
+
+---
+
+### 3.15.5 Key Profiling Conclusions
+
+1. The `branches` table contains **500 records**.
+2. `branch_id` is fully populated and unique across all 500 branch records.
+3. No NULL or blank `branch_name` values were identified.
+4. Eight branch names appear more than once across the dataset.
+5. Duplicate branch names do not imply duplicate records because each branch has a unique `branch_id`.
+6. `manager_name` is fully populated with no NULL or blank values.
+7. Daniel Brown is associated with two branch records.
+8. `city` is NULL for all 500 branch records.
+9. `country` is NULL for all 500 branch records.
+10. Geographic analysis using city or country cannot be performed reliably from the current branch data.
+11. The branches table has strong identifier integrity but significant geographic data completeness limitations.
+
+### 3.15.6 Profiling Status
+
+**Branches Table: COMPLETED**
 
 
 
