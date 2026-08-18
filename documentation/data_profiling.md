@@ -349,3 +349,53 @@ The profiling indicates that the `accounts` table is structurally clean and suit
 - Account records span from 2019 through 2025.
 
 The `accounts` table is therefore suitable for further SQL analysis and integration with other banking tables.
+
+
+
+## 3.11 Cards Data Quality Summary
+
+The profiling indicates that the `cards` table is structurally clean and suitable for downstream analysis.
+
+Key findings:
+
+- 100,000 card records are available.
+- `card_id` is fully populated and unique across all records.
+- No NULL values were identified in `card_id`.
+- All cards have a valid `account_id`.
+- No orphan cards were identified.
+- Two card types are present: Debit and Credit.
+- Debit cards account for 50,004 records, while Credit cards account for 49,996 records.
+- All cards have a valid `expiration_date`.
+- 12,561 cards are expired, while 87,439 cards remain active based on the 2025 year-end reference date.
+- Card expiration dates span from 2025 through 2032.
+- Cards are distributed relatively evenly across expiration years and card types.
+- Accounts with cards have between 1 and 8 cards, with an average of 1.81 cards per account.
+
+The `cards` table is therefore suitable for further analysis of card distribution, expiration patterns, account relationships, and card portfolio composition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
