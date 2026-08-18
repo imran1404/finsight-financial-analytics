@@ -375,6 +375,162 @@ The `cards` table is therefore suitable for further analysis of card distributio
 
 
 
+## 3.12 Loans Table Profiling
+
+The `loans` table contains loan information linked to customers.
+
+### 3.12.1 Table Overview
+
+Attribute | Result
+--- | ---
+Table | `loans`
+Rows | 30,000
+Columns | 5
+Identifier | `loan_id`
+
+Columns:
+
+* `loan_id`
+* `customer_id`
+* `loan_amount`
+* `interest_rate`
+* `start_date`
+
+---
+
+### 3.12.2 Loan ID Validation
+
+The `loan_id` field was checked for NULL values and uniqueness.
+
+Check | Result
+--- | ---
+Total Rows | 30,000
+Non-NULL `loan_id` | 30,000
+NULL `loan_id` | 0
+Unique `loan_id` | 30,000
+
+The total number of loan records matches the number of unique loan IDs.
+
+Conclusion: `loan_id` is fully populated and unique across the dataset.
+
+---
+
+### 3.12.3 Customer Relationship Analysis
+
+The `customer_id` field was checked for missing values and customer coverage.
+
+Check | Result
+--- | ---
+Total Loan Records | 30,000
+Non-NULL `customer_id` | 30,000
+NULL `customer_id` | 0
+Distinct Customers with Loans | 22,540
+
+The 30,000 loan records are associated with 22,540 distinct customers.
+
+The customer relationship was also validated against the `customers` table to identify potential orphan loan records.
+
+---
+
+### 3.12.4 Loan Amount Analysis
+
+Loan amount statistics were analyzed to identify missing and invalid monetary values.
+
+Metric | Result
+--- | ---
+Total Loan Records | 30,000
+Non-NULL `loan_amount` | 30,000
+NULL `loan_amount` | 0
+Minimum Loan Amount | 1,015.54
+Maximum Loan Amount | 299,996.69
+Average Loan Amount | 150,436.66
+Invalid Loan Amounts | 0
+
+No NULL, zero, or negative loan amounts were identified.
+
+Conclusion: `loan_amount` is complete and contains valid positive monetary values.
+
+---
+
+### 3.12.5 Interest Rate Analysis
+
+Interest rates were profiled for completeness, range, and invalid values.
+
+Metric | Result
+--- | ---
+Total Loan Records | 30,000
+Non-NULL `interest_rate` | 30,000
+NULL `interest_rate` | 0
+Minimum Interest Rate | 2%
+Maximum Interest Rate | 15%
+Average Interest Rate | 8.54%
+Invalid Interest Rates | 0
+
+All interest rate values fall within the observed 2%–15% range.
+
+Conclusion: `interest_rate` is complete and contains no invalid values based on the profiling rules applied.
+
+---
+
+### 3.12.6 Loan Start Date Analysis
+
+The `start_date` field was checked for completeness, date range, and valid datetime values.
+
+Metric | Result
+--- | ---
+Total Loan Records | 30,000
+Non-NULL `start_date` | 30,000
+NULL `start_date` | 0
+Earliest Start Date | 2019-01-01 00:29:38
+Latest Start Date | 2025-12-31 20:11:50
+Invalid Datetime Values | 0
+
+All loan records contain valid start dates.
+
+The loan records span from January 2019 through December 2025.
+
+---
+
+### 3.12.7 Loans Data Quality Summary
+
+Data Quality Check | Result | Status
+--- | --- | ---
+Loan Row Count | 30,000 | PASS
+Unique `loan_id` | 30,000 | PASS
+NULL `loan_id` | 0 | PASS
+NULL `customer_id` | 0 | PASS
+Distinct Customers with Loans | 22,540 | INFO
+NULL `loan_amount` | 0 | PASS
+Invalid Loan Amounts | 0 | PASS
+NULL `interest_rate` | 0 | PASS
+Invalid Interest Rates | 0 | PASS
+NULL `start_date` | 0 | PASS
+Invalid Start Dates | 0 | PASS
+Loan Date Range | 2019–2025 | PASS
+
+---
+
+### 3.12.8 Key Profiling Conclusions
+
+1. The `loans` table contains 30,000 records.
+2. `loan_id` is fully populated and unique across all loan records.
+3. No NULL `customer_id` values were identified.
+4. The dataset contains 22,540 distinct customers with loans.
+5. Loan amounts range from $1,015.54 to $299,996.69.
+6. No zero or negative loan amounts were identified.
+7. The average loan amount is approximately $150,436.66.
+8. Interest rates range from 2% to 15%, with an average of 8.54%.
+9. No NULL or invalid interest rates were identified.
+10. All loan records contain valid `start_date` values.
+11. Loan start dates span from January 2019 through December 2025.
+12. The `loans` table is structurally clean and suitable for downstream SQL analysis, subject to the customer relationship integrity check.
+
+---
+
+### 3.12.9 Profiling Status
+
+Loans Table: COMPLETED
+
 
 
 
