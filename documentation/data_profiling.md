@@ -605,9 +605,121 @@ Overall, the `merchants` table passed the basic data-quality checks and requires
 
 
 
+## 3.14 Transactions Data Profiling
 
+The `transactions` table was profiled to assess record completeness, identifier uniqueness, referential integrity, transaction amount validity, date validity, and yearly transaction distribution.
 
+### 3.14.1 Record and Transaction ID Analysis
 
+The `transaction_id` field was checked for missing values and uniqueness.
+
+| Check | Result |
+|---|---:|
+| Total Transactions | 1,000,000 |
+| Non-NULL `transaction_id` | 1,000,000 |
+| NULL `transaction_id` | 0 |
+| Unique `transaction_id` | 1,000,000 |
+
+All 1,000,000 transaction records contain a non-NULL and unique `transaction_id`.
+
+### 3.14.2 Account ID Analysis
+
+The `account_id` field was checked for missing values, uniqueness, and referential integrity.
+
+| Check | Result |
+|---|---:|
+| Total Transactions | 1,000,000 |
+| Non-NULL `account_id` | 1,000,000 |
+| NULL `account_id` | 0 |
+| Distinct Accounts | 75,000 |
+| Orphan Transactions | 0 |
+
+All transactions contain a valid `account_id`, and no transactions reference an account that does not exist in the `accounts` table.
+
+### 3.14.3 Merchant ID Analysis
+
+The `merchant_id` field was checked for missing values, uniqueness, and referential integrity.
+
+| Check | Result |
+|---|---:|
+| Total Transactions | 1,000,000 |
+| Non-NULL `merchant_id` | 1,000,000 |
+| NULL `merchant_id` | 0 |
+| Distinct Merchants | 5,000 |
+| Orphan Transactions | 0 |
+
+All transactions contain a valid `merchant_id`, and no transactions reference a merchant that does not exist in the `merchants` table.
+
+### 3.14.4 Transaction Amount Analysis
+
+The `amount_usd` field was assessed for missing values, invalid values, minimum, maximum, and average transaction amounts.
+
+| Check | Result |
+|---|---:|
+| Total Transactions | 1,000,000 |
+| Non-NULL `amount_usd` | 1,000,000 |
+| NULL `amount_usd` | 0 |
+| Minimum Amount | $1.02 |
+| Maximum Amount | $9,999.98 |
+| Average Amount | $5,001.16 |
+| Invalid Amounts (`<= 0`) | 0 |
+
+All transaction amounts are populated and positive. No zero or negative transaction amounts were identified.
+
+### 3.14.5 Transaction Date Analysis
+
+The `transaction_date` field was checked for missing values, valid date range, and invalid dates.
+
+| Check | Result |
+|---|---:|
+| Total Transactions | 1,000,000 |
+| Non-NULL `transaction_date` | 1,000,000 |
+| NULL `transaction_date` | 0 |
+| Earliest Transaction | 2019-01-01 |
+| Latest Transaction | 2025-12-31 |
+| Invalid Dates | 0 |
+
+All transaction records contain valid dates within the expected 2019–2025 period.
+
+### 3.14.6 Yearly Transaction Distribution
+
+Transaction volume and transaction value were analyzed across each year.
+
+| Year | Transaction Count |
+|---|---:|
+| 2019 | 143,046 |
+| 2020 | 142,989 |
+| 2021 | 142,765 |
+| 2022 | 142,843 |
+| 2023 | 142,969 |
+| 2024 | 143,063 |
+| 2025 | 142,325 |
+| **Total** | **1,000,000** |
+
+Transaction volume remains highly consistent across the seven-year period, with approximately 142,000–143,000 transactions recorded annually.
+
+### 3.14.7 Key Profiling Conclusions
+
+1. The `transactions` table contains 1,000,000 records.
+2. `transaction_id` is fully populated and unique across all transaction records.
+3. No NULL `account_id` values were identified.
+4. The transactions involve 75,000 distinct accounts.
+5. No orphan account references were identified.
+6. No NULL `merchant_id` values were identified.
+7. The transactions involve 5,000 distinct merchants.
+8. No orphan merchant references were identified.
+9. Transaction amounts range from $1.02 to $9,999.98.
+10. The average transaction amount is approximately $5,001.16.
+11. No zero or negative transaction amounts were identified.
+12. All transaction records contain valid `transaction_date` values.
+13. Transaction dates span from January 2019 through December 2025.
+14. No invalid transaction dates were identified.
+15. Transaction volume is consistently distributed across all seven years.
+16. The `transactions` table is structurally clean and suitable for downstream financial transaction analysis.
+
+### 3.14.8 Profiling Status
+
+Transactions Table: COMPLETED
 
 
 
