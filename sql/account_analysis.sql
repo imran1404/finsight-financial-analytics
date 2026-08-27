@@ -26,9 +26,9 @@ SELECT
     ROUND(COALESCE(SUM(l.loan_amount), 0), 2) AS total_loan_value
 FROM customers c
 LEFT JOIN accounts a
-    ON c.customer_id = a.customer_id
+ON c.customer_id = a.customer_id
 LEFT JOIN loans l
-    ON c.customer_id = l.customer_id
+ON c.customer_id = l.customer_id
 GROUP BY
     c.customer_id,
     c.first_name,
@@ -43,10 +43,7 @@ LIMIT 10;
 SELECT
     account_mix,
     COUNT(*) AS customer_count,
-    ROUND(
-        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (),
-        2
-    ) AS customer_percentage
+    ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (),2) AS customer_percentage
 FROM (
     SELECT
         customer_id,
@@ -126,7 +123,7 @@ SELECT
     ROUND(AVG(t.amount_usd), 2) AS avg_transaction_value
 FROM accounts a
 JOIN transactions t
-    ON a.account_id = t.account_id
+ON a.account_id = t.account_id
 GROUP BY a.account_type
 ORDER BY total_transaction_value DESC;
 
@@ -143,7 +140,7 @@ SELECT
     ROUND(AVG(t.amount_usd), 2) AS avg_transaction_value
 FROM accounts a
 JOIN transactions t
-    ON a.account_id = t.account_id
+ON a.account_id = t.account_id
 GROUP BY
     a.account_id,
     a.customer_id,
@@ -156,10 +153,10 @@ LIMIT 10;
 -- 10. Accounts With No Transactions
 
 SELECT
-    COUNT(*) AS accounts_without_transactions
+COUNT(*) AS accounts_without_transactions
 FROM accounts a
 LEFT JOIN transactions t
-    ON a.account_id = t.account_id
+ON a.account_id = t.account_id
 WHERE t.transaction_id IS NULL;
 
 
