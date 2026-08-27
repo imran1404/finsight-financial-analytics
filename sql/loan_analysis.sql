@@ -86,7 +86,7 @@ SELECT
     ROUND(AVG(l.interest_rate), 2) AS avg_interest_rate
 FROM customers c
 JOIN loans l
-    ON c.customer_id = l.customer_id
+ON c.customer_id = l.customer_id
 GROUP BY
     c.customer_id,
     c.first_name,
